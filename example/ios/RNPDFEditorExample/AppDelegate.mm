@@ -33,4 +33,11 @@
   return true;
 }
 
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  NSLog(@"Native iOS: application openURL: %@", url);
+  return true;
+}
+
 @end
