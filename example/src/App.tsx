@@ -1,11 +1,27 @@
-import React, { ComponentRef, useRef } from 'react';
+import React, { ComponentRef, useRef, useState } from 'react';
 import RNFS from 'react-native-fs';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { PDFEditorView } from '@ornament-health/react-native-pdf-editor';
+import DocumentsHandler, {DocumentsHandlerResult} from './DocumentsHandler';
 
 type PDFEVRef = ComponentRef<typeof PDFEditorView>;
 
 export default function App() {
+  
+  const onPressScroll = async () => {
+    console.log('handleDocumentsHandler: start');
+     await DocumentsHandler.process({
+       documents: [],
+       grayscale: true,
+       expectedWidth: 100
+     })
+       .then(res => {
+        console.log(res);
+      })
+       .catch(error => console.log(error.message));    
+  };
+
+
   const pdfRef = useRef<PDFEVRef>(null);
 
   const source = 'file://' + RNFS.MainBundlePath + '/book.pdf';
@@ -26,9 +42,9 @@ export default function App() {
     }
   };
 
-  const onPressScroll = () => {
-    pdfRef.current?.scrollAction();
-  };
+  // const onPressScroll = () => {
+  //   pdfRef.current?.scrollAction();
+  // };
 
   const onPressDraw = () => {
     pdfRef.current?.drawAction();
