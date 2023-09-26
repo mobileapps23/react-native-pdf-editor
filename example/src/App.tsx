@@ -7,16 +7,20 @@ import DocumentsHandler, {DocumentsHandlerResult} from './DocumentsHandler';
 type PDFEVRef = ComponentRef<typeof PDFEditorView>;
 
 export default function App() {
+
+  const source1 = 'file://' + RNFS.MainBundlePath + '/image1.jpeg';
+  const source2 = 'file://' + RNFS.MainBundlePath + '/image2.jpeg';
+  const source3 = 'file://' + RNFS.MainBundlePath + '/image3.jpeg';
+  const source4 = 'file://' + RNFS.MainBundlePath + '/image4.jpeg';
   
   const onPressScroll = async () => {
-    console.log('handleDocumentsHandler: start');
-     await DocumentsHandler.process({
-       documents: [],
+    await DocumentsHandler.process({
+       documents: [source1, source2, source3, source4],
        grayscale: true,
        expectedWidth: 100
      })
        .then(res => {
-        console.log(res);
+        console.log('RESULTS: ', res);
       })
        .catch(error => console.log(error.message));    
   };

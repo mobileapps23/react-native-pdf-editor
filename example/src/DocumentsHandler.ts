@@ -1,16 +1,14 @@
 import {NativeModules} from 'react-native';
-import type { Double } from 'react-native/Libraries/Types/CodegenTypes';
+import type { Double, Float } from 'react-native/Libraries/Types/CodegenTypes';
 
 export interface DocumentsHandlerRequest {
   documents: string[];
   grayscale: true;
-  expectedWidth: Double;
+  expectedWidth: Float;
 }
 
 export interface DocumentsHandlerResult {
-  request: string;//DocumentsHandlerRequest;
-  distance: string;//number;
-  status: string;//'moving' | 'delivered';
+  documents: string[];
 }
 
 export interface DocumentsHandler {
