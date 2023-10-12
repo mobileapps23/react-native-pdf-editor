@@ -11,7 +11,6 @@ class Document {
 
   private var id: Int
   private var type: DocumentType
-  private var pageCount: Int?
   private var documentURL: URL?
   private var pdfDocument: PDFDocument?
   private var grayscale: Bool
@@ -28,11 +27,9 @@ class Document {
       self.type = .pdf
       if let url = self.documentURL, let pdfDocument = PDFDocument(url: url) {
         self.pdfDocument = pdfDocument
-        self.pageCount = pdfDocument.pageCount
       }
     case "jpg", "JPG", "jpeg", "JPEG", "heic","HEIC", "png", "PNG":
       self.type = .image
-      self.pageCount = 1
     default:
       return nil
     }
