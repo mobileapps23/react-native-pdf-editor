@@ -22,15 +22,15 @@ export default function App() {
   }
 
   const options = {
-    fileName: sourcePDF,
-    canvasType: CanvasType.PDF,
+    filePath: [sourceJPG, sourceJPG, sourceJPG],
+    canvasType: CanvasType.Image,
     isToolBarHidden: false,
     viewBackgroundColor: '#40a35f',
     lineColor: '#4287f5',
     lineWidth: 40
   };
 
-  const handleSavePDF = (e: string | null) => {
+  const handleSave = (e: string[] | null) => {
     if (e === null) {
       console.log('got null value for url:', e);
     } else {
@@ -73,7 +73,7 @@ export default function App() {
         ref={pdfRef}
         style={styles.box}
         options={options}
-        onSavePDF={handleSavePDF}
+        onSave={handleSave}
       />
     </View>
   );

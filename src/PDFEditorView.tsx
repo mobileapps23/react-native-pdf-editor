@@ -24,19 +24,20 @@ interface ExtRef {
 interface RNComponentProps {
   style: ViewStyle;
   options: {
-    fileName: string;
+    filePath: string[];
+    canvasType: string;
     isToolBarHidden?: boolean;
     viewBackgroundColor?: string;
     lineColor?: string;
     lineWidth?: Float;
   };
-  onSavePDF?(url: string | null): void;
+  onSave?(url: string[] | null): void;
 }
 
 export interface RNComponentManagerProps
-  extends Omit<RNComponentProps, 'onSavePDF'>,
+  extends Omit<RNComponentProps, 'onSave'>,
     ExtRef {
-  onSavePDF(event: SyntheticEvent): void;
+  onSave(event: SyntheticEvent): void;
 }
 
 const RNComponentViewManager =
@@ -44,7 +45,7 @@ const RNComponentViewManager =
 type PDFEVRef = React.ComponentRef<typeof RNComponentViewManager>;
 
 export const PDFEditorView = forwardRef<ExtRef, RNComponentProps>(
-  ({ onSavePDF, ...props }, extRef) => {
+  ({ onSave, ...props }, extRef) => {
     useImperativeHandle(extRef, () => ({
       undoAction,
       clearAction,
@@ -104,8 +105,8 @@ export const PDFEditorView = forwardRef<ExtRef, RNComponentProps>(
         undoAction={undoAction}
         clearAction={clearAction}
         saveAction={saveAction}
-        onSavePDF={(event: SyntheticEvent) =>
-          onSavePDF && onSavePDF(getURLString(event.nativeEvent))
+        onSave={(event: SyntheticEvent) =>
+          onSave && onSave(getURLString(event.nativeEvent))
         }
         {...props}
       />
